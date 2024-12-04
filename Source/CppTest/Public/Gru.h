@@ -19,13 +19,17 @@ public:
 
 protected:
 
-	UPROPERTY(EditAnywhere, Category = "Event")
+	virtual void BeginPlay() override;
+	virtual void HandleMinionDeactivation();
+	virtual void ActivateMinion();
+
+	UPROPERTY(EditAnywhere, Category = "Minions")
     FOnMinionDeactivate OnDeactivate;
 
 	UPROPERTY(EditAnywhere,Category="Minions")
 	TArray<class AMinion*> Minions;
 
-	virtual void BeginPlay() override;
+
 	UPROPERTY(EditAnywhere, Category = "Minions")
 	float ActivateMinionInterval;
 
