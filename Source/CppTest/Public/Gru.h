@@ -3,24 +3,41 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Minion.h"
 #include "GameFramework/Actor.h"
 #include "Gru.generated.h"
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMinionDeactivate, AMinion*, Minion);
 
 UCLASS()
 class CPPTEST_API AGru : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
+public:
 	// Sets default values for this actor's properties
 	AGru();
 
 protected:
-	// Called when the game starts or when spawned
+
+	UPROPERTY(EditAnywhere, Category = "Event")
+    FOnMinionDeactivate OnDeactivate;
+
+	UPROPERTY(EditAnywhere,Category="Minions")
+	TArray<class AMinion*> Minions;
+
 	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere, Category = "Minions")
+	float ActivateMinionInterval;
+
+	UPROPERTY(VisibleAnywhere, Category = "Minions")
+	FTimerHandle GruTimerHandle;
+
+	UPROPERTY(VisibleAnywhere, Category = "Minions")
+	TArray<class AMinion*> InactiveMinions;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
 
 };

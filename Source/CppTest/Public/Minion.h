@@ -12,15 +12,29 @@ class CPPTEST_API AMinion : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AMinion();
+	UPROPERTY(EditAnywhere, Category = "Minion")
+	bool IsInUse;
 
+	UPROPERTY(EditAnywhere, Category = "Minion")
+	FString Name;
+
+	
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void Activate();
+	virtual void Deactivate();
 
+	UPROPERTY(EditAnywhere, Category = "Minion")
+	float Health;
+	
+	UPROPERTY(EditAnywhere, Category = "Minion")
+	float ActiveTime;
+
+	UPROPERTY(VisibleAnywhere, Category = "Minion")
+	FTimerHandle MinionTimerHandle;
+	
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 };
